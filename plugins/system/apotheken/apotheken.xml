@@ -6,7 +6,7 @@
 	<authorEmail>info@whykiki.de</authorEmail>
 	<authorUrl>whykiki.de</authorUrl>
 	<version>1.0.0</version>
-	<description>PLG_TEMPLATE_SWITCH_XML_DESCRIPTION</description>
+	<description>Apotheken Bereitschaftskalender: Einfach den Shortcode '[apotheken]' zB in einem Yootheme Textelement san der Stelle ablegen wo es gezeigt werden soll.</description>
 	<files>
 		<filename plugin="apotheken">apotheken.php</filename>
     <folder>layouts</folder>
@@ -16,13 +16,6 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-
-				<field
-				  name="theme"
-				  type="text"
-				  label="Standardtheme (kleingeschrieben)"
-				  />
-
 				<field
 						name="apotheken"
 						type="subform"
