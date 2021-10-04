@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="system" method="upgrade">
+	<name>plg_system_apotheken</name>
+	<author>Kiki Schueling</author>
+	<creationDate>March 2021</creationDate>
+	<authorEmail>info@whykiki.de</authorEmail>
+	<authorUrl>whykiki.de</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_TEMPLATE_SWITCH_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="apotheken">apotheken.php</filename>
+    <folder>layouts</folder>
+    <folder>assets</folder>
+    <folder>language</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+
+				<field
+				  name="theme"
+				  type="text"
+				  label="Standardtheme (kleingeschrieben)"
+				  />
+
+				<field
+						name="apotheken"
+						type="subform"
+						label="Apotheken"
+						description="Apotheken verwalten"
+						multiple="true"
+						min="1"
+						max="10"
+				>
+					<form>
+						<field
+								name="apothekenName"
+								type="text"
+								label="Apotheken Name"
+						/>
+						<field
+								name="strasse"
+								type="text"
+								label="Strasse"
+						/>
+						<field
+								name="plz"
+								type="text"
+								label="PLZ Ort"
+						/>
+						<field
+								name="telefon"
+								type="text"
+								label="Telefon"
+						/>
+
+						<field
+								name="isActive"
+							   	type="radio"
+								default="0"
+								label="Apotheke getauscht (Ausnahme!)"
+								description="Nur einschalten, wenn Apotheken ggf. ihre Termine getauscht haben"
+								class="btn-group btn-group-yesno"
+						>
+							<option value="1">JYES</option>
+							<option value="0">JNO</option>
+						</field>
+					</form>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>
