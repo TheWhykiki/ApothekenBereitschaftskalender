@@ -61,6 +61,7 @@
 
 				<field name="weitereApotheken" multiple="true" type="subform" formsource="/plugins/system/apotheken/apotheken2.xml" label="Apotheken 2" description="Subform Field Description" />
 			</fieldset>
+
 		</fields>
 	</config>
 </extension>

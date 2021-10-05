@@ -66,6 +66,7 @@
             </li>
         </ul>
         <?php endif; ?>
+
     </div>
     <div class="uk-card-footer">
     </div>

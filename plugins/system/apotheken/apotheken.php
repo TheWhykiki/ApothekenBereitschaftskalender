@@ -68,6 +68,7 @@ class PlgSystemApotheken extends JPlugin
             }
             */
 
+
             if($tagesID == 0)
             {
                 $tagesID = 1;
