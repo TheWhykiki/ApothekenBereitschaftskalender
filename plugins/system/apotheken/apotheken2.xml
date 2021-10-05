@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <field
+            name="apothekenName"
+            type="text"
+            label="Apotheken Name"
+    />
+    <field
+            name="strasse"
+            type="text"
+            label="Strasse"
+    />
+    <field
+            name="plz"
+            type="text"
+            label="PLZ Ort"
+    />
+    <field
+            name="telefon"
+            type="text"
+            label="Telefon"
+    />
+
+    <field
+            name="isActive"
+            type="radio"
+            default="0"
+            label="Apotheke getauscht (Ausnahme!)"
+            description="Nur einschalten, wenn Apotheken ggf. ihre Termine getauscht haben"
+            class="btn-group btn-group-yesno"
+    >
+        <option value="1">JYES</option>
+        <option value="0">JNO</option>
+    </field>
+</form>

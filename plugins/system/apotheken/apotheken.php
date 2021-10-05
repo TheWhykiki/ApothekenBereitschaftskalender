@@ -35,7 +35,6 @@ class PlgSystemApotheken extends JPlugin
         if($app->isClient('site'))
         {
 
-            $stateVar = $app->getUserState( 'themeState' );
             $params = $this->params;
 
             $date = new DateTime();
@@ -57,23 +56,33 @@ class PlgSystemApotheken extends JPlugin
 
             // Zum testen und Datum einstellen
             /*
-            $currentTime = strtotime('2021-10-10 07:00');
+            $currentTime = strtotime('2021-01-03 08:01');
 
-            if ($currentTime > strtotime('2021-10-10 07:59')) {
+            // TODO: Tages ID für den 01.01. zwischen 0-8h
+
+            if ($currentTime > strtotime('2021-01-01 07:59')) {
                 $tagesID =  date("z", $currentTime)+1;
             }
             else{
                 $tagesID =  date("z", $currentTime);
-            }*/
+            }
+            */
+
+            if($tagesID == 0)
+            {
+                $tagesID = 1;
+            }
 
             // Apotheken ID setzen, welchhe Apotheke ist dran?
             // Apotheken wechseln alle 21 Tage, daher TagesID modulo 21 um die ID zu bekommen
+            // wenn zB andere Turnus, andere Anzahl, dann hier die untere Zahl ändern
 
-            $apothekenID = ($tagesID % 21);
+            $apothekenID = ($tagesID % 23);
 
             // Apotheken aus dem Subform Feld in den Plugin Params holen
 
             $apothekenNeu = (array) $params->get('apotheken');
+            $weitereApotheken = (array) $params->get('weitereApotheken');
 
             $idx = 0;
 
@@ -97,6 +106,37 @@ class PlgSystemApotheken extends JPlugin
                 }
             }
 
+            $idx = 0;
+
+            foreach($weitereApotheken as $fieldName => $value)
+            {
+                $idx++;
+                //idx = Apotheken ID aus der DB
+                //wenn idx und apothekenID gleich, dann setze die aktive Apotheke
+                if($idx === $apothekenID){
+                    $activeApotheke2 = $value;
+                };
+
+                //Fallback, wenn Apotheken Dienste tauschen
+                // wenn eine Apotheke den Schalter auf "ein" hat, dann wird diese angezeigt.
+                // schaltet man den Schalter mehrere Male ein, dann wird nur die letzte "geschaltete" als aktiv gesetzt
+
+                if($value->isActive == 1)
+                {
+                    $activeApotheke2 = $value;
+                    break;
+                }
+            }
+
+            $aktiveApotheken = [
+                'apotheke1' =>  $activeApotheke,
+            ];
+
+            if(!empty($activeApotheke2))
+            {
+                $aktiveApotheken['apotheke2'] = $activeApotheke2;
+            }
+
             // das komplette HTML holen nach dem Rendern und nun bearbeiten
 
             $sHtml = $app->getBody();
@@ -104,7 +144,7 @@ class PlgSystemApotheken extends JPlugin
             // Layout setzen, das geladen werden soll
 
             $layout = new JLayoutFile('apotheken', JPATH_ROOT .'/plugins/system/apotheken/layouts');
-            $html = $layout->render($activeApotheke);
+            $html = $layout->render($aktiveApotheken);
 
             // shortcode setzen: es wird nach dem Code [apotheken] im HTML gesucht und dieser wird durch das
             // Layout ersetzt
