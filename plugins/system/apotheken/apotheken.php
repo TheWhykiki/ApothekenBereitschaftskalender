@@ -44,15 +44,15 @@ class PlgSystemApotheken extends JPlugin
 
             $currentTime = time();
 
-            var_dump($currentTime);
-            var_dump($currentTime);
+
 
             echo date('H:i:s', $currentTime);
+            $today = date('Y-m-d');
 
             // Nach 8h --> Tages ID Heute +1
             // Tages ID = Nummer des Tages 1-365
 
-            if ($currentTime > strtotime('10:00')) {
+            if ($currentTime > strtotime($today . '12:00')) {
                 $tagesID =  date("z", $currentTime)+1;
                 var_dump('drüber');
             }
@@ -60,20 +60,23 @@ class PlgSystemApotheken extends JPlugin
                 $tagesID =  date("z", $currentTime);
                 var_dump('drunter');
             }
-            var_dump($tagesID);
             // Zum testen und Datum einstellen
-            /*
-            $currentTime = strtotime('2021-01-03 08:01');
+
+            $currentTime = strtotime('2021-10-06 08:00');
+
 
             // TODO: Tages ID für den 01.01. zwischen 0-8h
 
-            if ($currentTime > strtotime('2021-01-01 07:59')) {
+            if ($currentTime > strtotime($today. ' 07:59')) {
                 $tagesID =  date("z", $currentTime)+1;
+                var_dump('drüber');
             }
             else{
                 $tagesID =  date("z", $currentTime);
+                var_dump('drunter');
             }
-            */
+
+            var_dump($tagesID);
 
 
             if($tagesID == 0)
